@@ -10,15 +10,15 @@ function App() {
         <Header />
         <Main />
         <section className="popup popup_type_edit">
-          <div clasNames="popup__container">
+          <div className="popup__container">
             <button className="popup__close-icon" type="button"></button>
             <form className="popup-form" name="popup-form-edit" novalidate>
               <h2 className="popup-form__heading">Редактировать профиль</h2>
-              <fieldset clasNames="popup-form__input-container">
+              <fieldset className="popup-form__input-container">
                 <label className="popup-form__field">
                   <input className="popup-form__item popup-form__item_el_name" type="text" name="name"
                     id="name-input" required minlength="2" maxlength="40" placeholder="Имя"></input>
-                  <span class="popup-form__input-error name-input-error"></span>
+                  <span className="popup-form__input-error name-input-error"></span>
                 </label>
                 <label className="popup-form__field">
                   <input className="popup-form__item popup-form__item_el_about" type="text" name="about"
