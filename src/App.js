@@ -1,11 +1,14 @@
-import './App.css';
+import './index.css';
+import logo from './images/logo.svg';
+import pen from './images/pen.svg';
+import plus from './images/plus.svg';
 
 function App() {
   return (
     <body>
       <div className="root">
         <header className="header">
-          <img className="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип"></img>
+          <img className="header__logo" src={logo} alt="Логотип"></img>
         </header>
         <main className="content">
           <section class="profile">
@@ -19,9 +22,9 @@ function App() {
               <p className="profile__about">Исследователь океана</p>
             </div>
             <button className="profile__edit-button" type="button"><img className="profile__edit-button-img"
-              src="<%=require('./images/pen.svg')%>" alt="Кнопка редактирования"></img></button>
+              src={pen} alt="Кнопка редактирования"></img></button>
             <button className="profile__add-button" type="button">
-              <img className="profile__add-button-img" src="<%=require('./images/plus.svg')%>"
+              <img className="profile__add-button-img" src={plus}
                 alt="Кнопка добавления"></img>
             </button>
           </section>
@@ -114,7 +117,7 @@ function App() {
         </section>
 
         <footer className="footer">
-          <p className="footer__author">&#169; 2021 Алексей Булгаков</p>
+          <p className="footer__author">&#169; 2022 Алексей Булгаков</p>
         </footer>
       </div>
 
