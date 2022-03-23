@@ -1,3 +1,4 @@
+import React from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -6,29 +7,46 @@ import ImagePopup from './ImagePopup';
 import '../index.css';
 
 function App() {
+  const [isEditProfilePopupOpen, setisEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setisAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setisEditAvatarPopupOpen] = React.useState(false);
+
+  function handleEditAvatarClick() {
+    setisEditAvatarPopupOpen(true);
+  }
+  
+  function handleEditProfileClick() {
+    setisEditProfilePopupOpen(true);
+  }
+  
+  function handleAddPlaceClick() {
+    setisAddPlacePopupOpen(true);
+  }
+
   return (
     <body>
       <div className="root">
         <Header />
-        <Main />
+        <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} />
         <PopupWithForm name="edit"
           title="Редактировать профиль"
           children={
             <fieldset className="popup-form__input-container">
               <label className="popup-form__field">
                 <input className="popup-form__item popup-form__item_el_name" type="text" name="name"
-                  id="name-input" required minlength="2" maxlength="40" placeholder="Имя"></input>
+                  id="name-input" required minLength="2" maxLength="40" placeholder="Имя"></input>
                 <span className="popup-form__input-error name-input-error"></span>
               </label>
               <label className="popup-form__field">
                 <input className="popup-form__item popup-form__item_el_about" type="text" name="about"
-                  id="about-input" required minlength="2" maxlength="200"
+                  id="about-input" required minLength="2" maxLength="200"
                   placeholder="Профессиональная деятельность"></input>
                 <span className="popup-form__input-error about-input-error"></span>
               </label>
               <button className="popup-form__button" type="submit">Сохранить</button>
             </fieldset>
           }
+          isOpen={isEditProfilePopupOpen}
         />
 
         <PopupWithForm name="new-card"
@@ -37,7 +55,7 @@ function App() {
             <fieldset className="popup-form__input-container">
               <label className="popup-form__field">
                 <input className="popup-form__item popup-form__item_el_name" type="text" name="name"
-                  placeholder="Название" id="name" required minlength="2" maxlength="30"></input>
+                  placeholder="Название" id="name" required minLength="2" maxLength="30"></input>
                 <span className="popup-form__input-error name-error"></span>
               </label>
               <label className="popup-form__field">
@@ -48,6 +66,7 @@ function App() {
               <button className="popup-form__button" type="submit">Создать</button>
             </fieldset>
           }
+          isOpen={isAddPlacePopupOpen}
         />
 
         <PopupWithForm name="new-avatar"
@@ -62,6 +81,7 @@ function App() {
               <button className="popup-form__button" type="submit">Сохранить</button>
             </fieldset>
           }
+          isOpen={isEditAvatarPopupOpen}
         />
 
         <PopupWithForm name="delete"
@@ -71,6 +91,7 @@ function App() {
               <button className="popup-form__button popup-form__button_type_delete" type="submit">Да</button>
             </fieldset>
           }
+          isOpen={false}
         />
 
         <ImagePopup />
