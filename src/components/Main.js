@@ -7,7 +7,7 @@ class Main extends React.Component {
     render() {
         return (
             <main className="content">
-                <section class="profile">
+                <section className="profile">
                     <div className="profile__avatar-box">
                         <img className="profile__avatar" src="<%=require('./images/photo.jpg')%>" alt="Аватар"></img>
                         <button onClick={this.props.onEditAvatar} type="button" className="profile__avatar-btn"><img className="profile__avatar-edit-img"

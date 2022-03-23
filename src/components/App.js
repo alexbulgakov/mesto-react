@@ -23,6 +23,12 @@ function App() {
     setisAddPlacePopupOpen(true);
   }
 
+  function closeAllPopups() {
+    setisEditAvatarPopupOpen(false);
+    setisEditProfilePopupOpen(false);
+    setisAddPlacePopupOpen(false);
+  }
+
   return (
     <body>
       <div className="root">
@@ -47,6 +53,7 @@ function App() {
             </fieldset>
           }
           isOpen={isEditProfilePopupOpen}
+          onClosePopups={closeAllPopups}
         />
 
         <PopupWithForm name="new-card"
@@ -67,6 +74,7 @@ function App() {
             </fieldset>
           }
           isOpen={isAddPlacePopupOpen}
+          onClosePopups={closeAllPopups}
         />
 
         <PopupWithForm name="new-avatar"
@@ -82,6 +90,7 @@ function App() {
             </fieldset>
           }
           isOpen={isEditAvatarPopupOpen}
+          onClosePopups={closeAllPopups}
         />
 
         <PopupWithForm name="delete"
@@ -92,6 +101,7 @@ function App() {
             </fieldset>
           }
           isOpen={false}
+          onClosePopups={closeAllPopups}
         />
 
         <ImagePopup />
