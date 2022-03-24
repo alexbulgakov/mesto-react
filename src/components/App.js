@@ -7,33 +7,39 @@ import ImagePopup from './ImagePopup';
 import '../index.css';
 
 function App() {
-  const [isEditProfilePopupOpen, setisEditProfilePopupOpen] = React.useState(false);
-  const [isAddPlacePopupOpen, setisAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setisEditAvatarPopupOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState({ name: '', link: '' });
 
   function handleEditAvatarClick() {
-    setisEditAvatarPopupOpen(true);
+    setIsEditAvatarPopupOpen(true);
   }
-  
+
   function handleEditProfileClick() {
-    setisEditProfilePopupOpen(true);
+    setIsEditProfilePopupOpen(true);
   }
-  
+
   function handleAddPlaceClick() {
-    setisAddPlacePopupOpen(true);
+    setIsAddPlacePopupOpen(true);
+  }
+
+  function handleCardClick(data) {
+    setSelectedCard({ name: data.name, link: data.link });
   }
 
   function closeAllPopups() {
-    setisEditAvatarPopupOpen(false);
-    setisEditProfilePopupOpen(false);
-    setisAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setSelectedCard({ name: '', link: '' });
   }
 
   return (
     <body>
       <div className="root">
         <Header />
-        <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} />
+        <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} />
         <PopupWithForm name="edit"
           title="Редактировать профиль"
           children={
@@ -104,7 +110,7 @@ function App() {
           onClosePopups={closeAllPopups}
         />
 
-        <ImagePopup />
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
         <Footer />
       </div>

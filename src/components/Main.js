@@ -6,8 +6,8 @@ import plus from '../images/plus.svg';
 
 class Main extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             userName: '',
@@ -31,7 +31,6 @@ class Main extends React.Component {
         api.getCards()
             .then(res => {
                 this.setState({ cards: res })
-                console.log(this.state.cards);
             })
             .catch((error) => {
                 console.log(error);
@@ -62,8 +61,8 @@ class Main extends React.Component {
 
                 <section className="elements">
                     <ul className="elements__list">
-                        {this.state.cards.map((card, i) => (
-                                <Card currentCard={card} />
+                        {this.state.cards.map((card) => (
+                                <Card currentCard={card} key={card._id} onCardClick={this.props.onCardClick} />
                         ))}
                     </ul>
                 </section>
