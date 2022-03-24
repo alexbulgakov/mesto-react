@@ -108,20 +108,6 @@ function App() {
 
         <Footer />
       </div>
-
-      <template id="card">
-        <li className="element">
-          <img className="element__picture" src="#" alt="Фото локации"></img>
-          <button className="element__delete" type="button"></button>
-          <div className="element__location-box">
-            <h2 className="element__location"></h2>
-            <div className="element__like-box">
-              <button className="element__like" type="button"></button>
-              <span className="element__likes-counter"></span>
-            </div>
-          </div>
-        </li>
-      </template>
     </body>
   );
 }

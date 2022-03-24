@@ -12,7 +12,8 @@ class Main extends React.Component {
             userName: '',
             userDescription: '',
             userAvatar: '',
-          };
+            cards: [],
+        };
     }
 
     componentDidMount() {
@@ -21,6 +22,15 @@ class Main extends React.Component {
                 this.setState({ userName: res.name });
                 this.setState({ userDescription: res.about });
                 this.setState({ userAvatar: res.avatar });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+        api.getCards()
+            .then(res => {
+                this.setState({ cards: res })
+                console.log(this.state.cards);
             })
             .catch((error) => {
                 console.log(error);
@@ -50,7 +60,21 @@ class Main extends React.Component {
                 </section>
 
                 <section className="elements">
-                    <ul className="elements__list"></ul>
+                    <ul className="elements__list">
+                        {this.state.cards.map((card, i) => (
+                                <li className="element" key={card._id}>
+                                    <img className="element__picture" src={card.link} alt="Фото локации"></img>
+                                    <button className="element__delete" type="button"></button>
+                                    <div className="element__location-box">
+                                        <h2 className="element__location">{card.name}</h2>
+                                        <div className="element__like-box">
+                                            <button className="element__like" type="button"></button>
+                                            <span className="element__likes-counter">{card.likes.length}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                        ))}
+                    </ul>
                 </section>
             </main>
         );
