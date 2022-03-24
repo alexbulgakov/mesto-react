@@ -1,4 +1,5 @@
 import React from 'react';
+import Card from './Card';
 import api from '../utils/api';
 import pen from '../images/pen.svg';
 import plus from '../images/plus.svg';
@@ -62,17 +63,7 @@ class Main extends React.Component {
                 <section className="elements">
                     <ul className="elements__list">
                         {this.state.cards.map((card, i) => (
-                                <li className="element" key={card._id}>
-                                    <img className="element__picture" src={card.link} alt="Фото локации"></img>
-                                    <button className="element__delete" type="button"></button>
-                                    <div className="element__location-box">
-                                        <h2 className="element__location">{card.name}</h2>
-                                        <div className="element__like-box">
-                                            <button className="element__like" type="button"></button>
-                                            <span className="element__likes-counter">{card.likes.length}</span>
-                                        </div>
-                                    </div>
-                                </li>
+                                <Card currentCard={card} />
                         ))}
                     </ul>
                 </section>
