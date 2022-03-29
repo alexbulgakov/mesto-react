@@ -6,3 +6,11 @@ export const options = {
     }
 };
 
+export const defaultUser = {
+    name: "Cousteau",
+    about: "Sailor, researcher",
+    avatar: "https://lastfm.freetls.fastly.net/i/u/ar0/d0d9014fe12a4ae5ca7d9047af1574b8.png",
+    _id: "",
+    email: "",
+  };
+

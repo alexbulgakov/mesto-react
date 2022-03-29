@@ -1,33 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Card from './Card';
 import api from '../utils/api';
 import pen from '../images/pen.svg';
 import plus from '../images/plus.svg';
 
 class Main extends React.Component {
+    static contextType = CurrentUserContext;
 
     constructor(props) {
         super(props);
 
         this.state = {
-            userName: '',
-            userDescription: '',
-            userAvatar: '',
             cards: [],
         };
     }
 
     componentDidMount() {
-        api.getUserInfo()
-            .then(res => {
-                this.setState({ userName: res.name });
-                this.setState({ userDescription: res.about });
-                this.setState({ userAvatar: res.avatar });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-
         api.getCards()
             .then(res => {
                 this.setState({ cards: res })
@@ -43,13 +32,13 @@ class Main extends React.Component {
             <main className="content">
                 <section className="profile">
                     <div className="profile__avatar-box">
-                        <img className="profile__avatar" src={this.state.userAvatar} alt="Аватар"></img>
+                        <img className="profile__avatar" src={this.context.avatar} alt="Аватар"></img>
                         <button onClick={this.props.onEditAvatar} type="button" className="profile__avatar-btn"><img className="profile__avatar-edit-img"
                             src={pen} alt="Кнопка редактирования"></img></button>
                     </div>
                     <div className="profile__profile-info">
-                        <h1 className="profile__name">{`${this.state.userName}`}</h1>
-                        <p className="profile__about">{this.state.userDescription}</p>
+                        <h1 className="profile__name">{`${this.context.name}`}</h1>
+                        <p className="profile__about">{this.context.about}</p>
                     </div>
                     <button onClick={this.props.onEditProfile} className="profile__edit-button" type="button"><img className="profile__edit-button-img"
                         src={pen} alt="Кнопка редактирования"></img></button>
@@ -62,7 +51,7 @@ class Main extends React.Component {
                 <section className="elements">
                     <ul className="elements__list">
                         {this.state.cards.map((card) => (
-                                <Card currentCard={card} key={card._id} onCardClick={this.props.onCardClick} />
+                            <Card currentCard={card} key={card._id} onCardClick={this.props.onCardClick} />
                         ))}
                     </ul>
                 </section>
