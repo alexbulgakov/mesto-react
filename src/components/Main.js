@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Card from './Card';
-import api from '../utils/api';
 import pen from '../images/pen.svg';
 import plus from '../images/plus.svg';
 
@@ -10,22 +9,7 @@ class Main extends React.Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {
-            cards: [],
-        };
     }
-
-    componentDidMount() {
-        api.getCards()
-            .then(res => {
-                this.setState({ cards: res })
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
-
 
     render() {
         return (
@@ -50,7 +34,7 @@ class Main extends React.Component {
 
                 <section className="elements">
                     <ul className="elements__list">
-                        {this.state.cards.map((card) => (
+                        {this.props.cards.map((card) => (
                             <Card currentCard={card} key={card._id} onCardClick={this.props.onCardClick} />
                         ))}
                     </ul>

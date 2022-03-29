@@ -15,11 +15,20 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({ name: '', link: '' });
   const [currentUser, setCurrentUser] = useState(defaultUser);
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     api.getUserInfo()
       .then(res => {
         setCurrentUser(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    api.getCards()
+      .then(res => {
+        setCards(res);
       })
       .catch((error) => {
         console.log(error);
@@ -57,7 +66,8 @@ function App() {
           <Main onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}
             onEditAvatar={handleEditAvatarClick}
-            onCardClick={handleCardClick} />
+            onCardClick={handleCardClick}
+            cards={cards} />
           <PopupWithForm
             name="edit"
             title="Редактировать профиль"
