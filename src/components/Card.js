@@ -23,7 +23,7 @@ function Card(props) {
             <div className="element__location-box">
                 <h2 className="element__location">{props.currentCard.name}</h2>
                 <div className="element__like-box">
-                    <button className={cardLikeButtonClassName} type="button"></button>
+                    <button className={cardLikeButtonClassName} type="button" onClick={props.onCardLike.bind(this, props.currentCard)}></button>
                     <span className="element__likes-counter">{props.currentCard.likes.length}</span>
                 </div>
             </div>

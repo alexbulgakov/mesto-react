@@ -7,8 +7,8 @@ export const options = {
 };
 
 export const defaultUser = {
-    name: "Cousteau",
-    about: "Sailor, researcher",
+    name: "Жак-Ив Кусто",
+    about: "Исследователь океана",
     avatar: "https://lastfm.freetls.fastly.net/i/u/ar0/d0d9014fe12a4ae5ca7d9047af1574b8.png",
     _id: "",
     email: "",
