@@ -5,6 +5,7 @@ import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 import api from '../utils/api';
 import '../index.css';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
@@ -92,6 +93,22 @@ function App() {
       );
   }
 
+  function handleUpdateAvatar({ avatar }) {
+    setLoading(true);
+
+    api.setUserAvatar(avatar)
+      .then((res) => {
+        setCurrentUser(res);
+        closeAllPopups();
+      })
+      .catch((error) =>
+        console.log(error)
+      )
+      .finally(() =>
+        setLoading(false)
+      );
+  }
+
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
@@ -104,6 +121,7 @@ function App() {
       <body>
         <div className="root">
           <Header />
+
           <Main
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}
@@ -112,13 +130,21 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
             cards={cards} />
+
           <LoadingContext.Provider value={loading}>
             <EditProfilePopup
               isOpen={isEditProfilePopupOpen}
               onClosePopups={closeAllPopups}
               onUpdateUser={handleUpdateUser}
             />
+
+            <EditAvatarPopup
+              isOpen={isEditAvatarPopupOpen}
+              onClosePopups={closeAllPopups}
+              onUpdateAvatar={handleUpdateAvatar}
+            />
           </LoadingContext.Provider>
+
           <PopupWithForm
             name="new-card"
             title="Новое место"
@@ -135,20 +161,6 @@ function App() {
               <input className="popup-form__item popup-form__item_el_link" type="url" name="link"
                 placeholder="Ссылка на картинку" id="link" required></input>
               <span className="popup-form__input-error link-error"></span>
-            </label>
-          </PopupWithForm>
-
-          <PopupWithForm
-            name="new-avatar"
-            title="Обновить аватар"
-            buttonText="Сохранить"
-            isOpen={isEditAvatarPopupOpen}
-            onClosePopups={closeAllPopups}
-          >
-            <label className="popup-form__field">
-              <input className="popup-form__item popup-form__item_avatar_link" type="url" name="link-avatar"
-                placeholder="Ссылка на аватар" id="avatar-link" required></input>
-              <span className="popup-form__input-error avatar-link-error"></span>
             </label>
           </PopupWithForm>
 

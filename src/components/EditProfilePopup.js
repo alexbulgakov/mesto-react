@@ -1,30 +1,27 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
-import { CurrentUserContext } from '../contexts/CurrentUserContext'
 
 function EditProfilePopup(props) {
-    const currentUser = React.useContext(CurrentUserContext);
-
     const [name, setName] = React.useState('');
     const [description, setDescription] = React.useState('');
 
     function handleNameChange(e) {
         setName(e.target.value);
-      }
-    
-      function handleDescriptionChange(e) {
+    }
+
+    function handleDescriptionChange(e) {
         setDescription(e.target.value);
-      }
+    }
 
     function handleSubmit(e) {
         e.preventDefault();
-      
+
         props.onUpdateUser({
             name,
             about: description,
-          });
-      }
- 
+        });
+    }
+
     return (
         <PopupWithForm
             name="edit"
