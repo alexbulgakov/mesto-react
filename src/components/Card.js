@@ -16,10 +16,14 @@ function Card(props) {
         props.onCardClick(props.currentCard);
     }
 
+    function handleDeleteClick() {
+        props.onCardDelete(props.currentCard);
+    }
+
     return (
         <li className="element">
             <img onClick={handleClick} className="element__picture" src={props.currentCard.link} alt="Фото локации"></img>
-            <button className={cardDeleteButtonClassName} type="button"></button>
+            <button className={cardDeleteButtonClassName} type="button" onClick={handleDeleteClick}></button>
             <div className="element__location-box">
                 <h2 className="element__location">{props.currentCard.name}</h2>
                 <div className="element__like-box">

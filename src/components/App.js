@@ -4,6 +4,7 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import DeletePopupConfirmation from './DeletePopupConfirmation';
 import api from '../utils/api';
 import '../index.css';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
@@ -13,6 +14,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({ name: '', link: '' });
   const [currentUser, setCurrentUser] = useState(defaultUser);
   const [cards, setCards] = useState([]);
@@ -60,13 +62,26 @@ function App() {
       })
       .catch((error) => {
         console.log(error);
-      });;
+      });
+  }
+
+  function handleCardDelete(card) {
+    const { id } = selectedCard;
+    api.deleteCard(card._id)
+      .then(() => {
+        setCards((state) => state.filter((c) => c._id !== id));
+      })
+      .catch((error) =>
+        console.log(error)
+      );
+    setIsDeletePopupOpen(false);
   }
 
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setIsDeletePopupOpen(false);
     setSelectedCard({ name: '', link: '' });
   }
 
@@ -80,6 +95,7 @@ function App() {
             onEditAvatar={handleEditAvatarClick}
             onCardClick={handleCardClick}
             onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
             cards={cards} />
           <PopupWithForm
             name="edit"
@@ -134,14 +150,6 @@ function App() {
             </label>
           </PopupWithForm>
 
-          <PopupWithForm
-            name="delete"
-            title="Вы уверены?"
-            isOpen={false}
-            onClosePopups={closeAllPopups}
-            buttonText="Да"
-          >
-          </PopupWithForm>
           <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
           <Footer />
