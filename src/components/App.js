@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
@@ -11,6 +10,7 @@ import '../index.css';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { defaultUser } from '../utils/utils';
 import { LoadingContext } from '../contexts/LoadingContext';
+import AddPlacePopup from './AddPlacePopup';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -109,6 +109,22 @@ function App() {
       );
   }
 
+  function handleAddPlaceSubmit(card) {
+    setLoading(true);
+
+    api.addCard(card)
+      .then((res) => {
+        setCards([res, ...cards]);
+        closeAllPopups();
+      })
+      .catch((error) =>
+        console.log(error)
+      )
+      .finally(() =>
+        setLoading(false)
+      );
+  }
+
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
@@ -143,26 +159,13 @@ function App() {
               onClosePopups={closeAllPopups}
               onUpdateAvatar={handleUpdateAvatar}
             />
-          </LoadingContext.Provider>
 
-          <PopupWithForm
-            name="new-card"
-            title="Новое место"
-            buttonText="Создать"
-            isOpen={isAddPlacePopupOpen}
-            onClosePopups={closeAllPopups}
-          >
-            <label className="popup-form__field">
-              <input className="popup-form__item popup-form__item_el_name" type="text" name="name"
-                placeholder="Название" id="name" required minLength="2" maxLength="30"></input>
-              <span className="popup-form__input-error name-error"></span>
-            </label>
-            <label className="popup-form__field">
-              <input className="popup-form__item popup-form__item_el_link" type="url" name="link"
-                placeholder="Ссылка на картинку" id="link" required></input>
-              <span className="popup-form__input-error link-error"></span>
-            </label>
-          </PopupWithForm>
+            <AddPlacePopup
+              isOpen={isAddPlacePopupOpen}
+              onClosePopups={closeAllPopups}
+              onAddPlace={handleAddPlaceSubmit}
+            />
+          </LoadingContext.Provider>
 
           <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
