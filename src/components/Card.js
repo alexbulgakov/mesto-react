@@ -22,7 +22,7 @@ function Card(props) {
 
     return (
         <li className="element">
-            <img onClick={handleClick} className="element__picture" src={props.currentCard.link} alt="Фото локации"></img>
+            <img onClick={handleClick} className="element__picture" src={props.currentCard.link} alt={props.currentCard.name}></img>
             <button className={cardDeleteButtonClassName} type="button" onClick={handleDeleteClick}></button>
             <div className="element__location-box">
                 <h2 className="element__location">{props.currentCard.name}</h2>

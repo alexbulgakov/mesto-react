@@ -80,6 +80,7 @@ function App() {
 
   function handleUpdateUser(info) {
     setLoading(true);
+
     api.setUserInfo(info)
       .then((res) => {
         setCurrentUser(res);
@@ -134,7 +135,6 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <body>
         <div className="root">
           <Header />
 
@@ -171,7 +171,7 @@ function App() {
 
           <Footer />
         </div>
-      </body>
+
     </CurrentUserContext.Provider>
   );
 }

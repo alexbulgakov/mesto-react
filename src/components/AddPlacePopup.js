@@ -18,6 +18,12 @@ function AddPlacePopup(props) {
 
         props.onAddPlace({ name, link });
     }
+
+    React.useEffect(() => {
+        setName('');
+        setLink('');
+    }, [props.isOpen]);
+
     return (
         <PopupWithForm
             name="new-card"
@@ -38,6 +44,7 @@ function AddPlacePopup(props) {
                     minLength="2"
                     maxLength="30"
                     onChange={handleNameChange}
+                    value={name}
                 >
                 </input>
                 <span className="popup-form__input-error name-error"></span>
@@ -51,6 +58,7 @@ function AddPlacePopup(props) {
                     id="link"
                     required
                     onChange={handleLinkChange}
+                    value={link}
                 >
                 </input>
                 <span className="popup-form__input-error link-error"></span>
