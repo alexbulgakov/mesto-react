@@ -37,7 +37,7 @@ function App() {
       .catch((error) => {
         console.log(error);
       });
-  });
+  }, []);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -135,42 +135,42 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-        <div className="root">
-          <Header />
+      <div className="root">
+        <Header />
 
-          <Main
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleAddPlaceClick}
-            onEditAvatar={handleEditAvatarClick}
-            onCardClick={handleCardClick}
-            onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete}
-            cards={cards} />
+        <Main
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onEditAvatar={handleEditAvatarClick}
+          onCardClick={handleCardClick}
+          onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
+          cards={cards} />
 
-          <LoadingContext.Provider value={loading}>
-            <EditProfilePopup
-              isOpen={isEditProfilePopupOpen}
-              onClosePopups={closeAllPopups}
-              onUpdateUser={handleUpdateUser}
-            />
+        <LoadingContext.Provider value={loading}>
+          <EditProfilePopup
+            isOpen={isEditProfilePopupOpen}
+            onClosePopups={closeAllPopups}
+            onUpdateUser={handleUpdateUser}
+          />
 
-            <EditAvatarPopup
-              isOpen={isEditAvatarPopupOpen}
-              onClosePopups={closeAllPopups}
-              onUpdateAvatar={handleUpdateAvatar}
-            />
+          <EditAvatarPopup
+            isOpen={isEditAvatarPopupOpen}
+            onClosePopups={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar}
+          />
 
-            <AddPlacePopup
-              isOpen={isAddPlacePopupOpen}
-              onClosePopups={closeAllPopups}
-              onAddPlace={handleAddPlaceSubmit}
-            />
-          </LoadingContext.Provider>
+          <AddPlacePopup
+            isOpen={isAddPlacePopupOpen}
+            onClosePopups={closeAllPopups}
+            onAddPlace={handleAddPlaceSubmit}
+          />
+        </LoadingContext.Provider>
 
-          <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
-          <Footer />
-        </div>
+        <Footer />
+      </div>
 
     </CurrentUserContext.Provider>
   );

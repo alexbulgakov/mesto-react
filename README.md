@@ -1,4 +1,4 @@
-<h1 align="center">Mesto</h1>
+<h1 align="center">Mesto-React</h1>
 <h3 align="center"><a href="https://alexunnt.github.io/mesto-react/">Посмотреть на Github Pages</a></h3>
 
 #### Описание
