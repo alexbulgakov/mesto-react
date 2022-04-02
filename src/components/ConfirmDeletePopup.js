@@ -20,7 +20,10 @@ function ConfirmDeletePopup(props) {
                 >
                     <h2 className="popup-form__heading">Вы уверены?</h2>
                     <fieldset className="popup-form__input-container popup-form__input-container_type_delete">
-                        <button className="popup-form__button popup-form__button_type_delete" type="submit">{loading ? "Сохранение..." : "Да"}</button>
+                        <button
+                            className="popup-form__button popup-form__button_type_delete"
+                            type="submit">{loading ? "Сохранение..." : "Да"}
+                        </button>
                     </fieldset>
                 </form>
             </div>

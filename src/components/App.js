@@ -71,6 +71,7 @@ function App() {
 
   function handleCardDelete(e) {
     e.preventDefault();
+    
     const { id } = selectedCard;
     api.deleteCard(id)
       .then(() => {
